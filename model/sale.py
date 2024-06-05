@@ -1,6 +1,12 @@
 import datetime
 from dataclasses import dataclass
 
+from model.product import Product
+from model.retailer import Retailer
+from database.products_dao import ProductDao
+from database.retailers_dao import RetailersDAO
+
+
 @dataclass
 class Sale:
     """
@@ -40,3 +46,16 @@ class Sale:
 
     def __lt__(self, other):
         return self.ricavo < other.ricavo
+
+    def get_year(self) -> int:
+        return self.date.year
+
+    def get_brand(self) -> str:
+        if self.product is None:
+            self.product = ProductDao.get_product(self.product_number)
+        return self.product.product_brand
+
+    def get_retailer(self) -> Retailer:
+        if self.retailer is None:
+            self.retailer = RetailersDAO.get_retailer(self.retailer_code)
+        return self.retailer

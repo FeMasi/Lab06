@@ -5,6 +5,7 @@ class View(ft.UserControl):
     def __init__(self, page: ft.Page):
         super().__init__()
         # page stuff
+        self.pr_ring = None
         self._page = page
         self._page.title = "Template application using MVC and DAO"
         self._page.horizontal_alignment = 'CENTER'
@@ -16,8 +17,9 @@ class View(ft.UserControl):
         self.dd_anno = None
         self.dd_brand = None
         self.dd_retailer = None
-        self.btn_hello = None
-        self.txt_result = None
+        self.btn_top_vendite = None
+        self.btn_analizza_vendite = None
+        self.lst_result = None
         self.txt_container = None
 
     def load_interface(self):
@@ -54,14 +56,24 @@ class View(ft.UserControl):
         self._controller.populate_dd_retailer()
         # button for the "hello" reply
 
-        self.btn_hello = ft.ElevatedButton(text="Hello", on_click=self._controller.handle_hello)
-        row1 = ft.Row([self.txt_name, self.btn_hello],
+        #self.btn_hello = ft.ElevatedButton(text="Hello", on_click=self._controller.handle_hello)
+        row1 = ft.Row([self.dd_anno, self.dd_brand, self.dd_retailer],
                       alignment=ft.MainAxisAlignment.CENTER)
         self._page.controls.append(row1)
 
+        self.btn_top_vendite = ft.ElevatedButton(text="Top vendite",
+                                                 on_click=self._controller.handle_top_vendite)
+        self.btn_analizza_vendite = ft.ElevatedButton(text="Analizza vendite",
+                                                      on_click=self._controller.handle_analizza_vendite)
+        self.pr_ring = ft.ProgressRing()
+        self.pr_ring.visible = False
+        row2= ft.Row([self.btn_top_vendite, self.btn_analizza_vendite],
+                     alignment=ft.MainAxisAlignment.CENTER)
+        self._page.controls.append(row2)
+
         # List View where the reply is printed
-        self.txt_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=True)
-        self._page.controls.append(self.txt_result)
+        self.lst_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=True)
+        self._page.controls.append(self.lst_result)
         self._page.update()
 
     @property

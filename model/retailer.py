@@ -3,7 +3,7 @@ from dataclasses import dataclass
 @dataclass
 class Retailer:
     retailer_code: int
-    retailer_name : str
+    retailer_name: str
     Type: str
     Country: str
 
