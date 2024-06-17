@@ -31,7 +31,7 @@ class View(ft.UserControl):
         # text field for the name
         self.dd_anno = ft.Dropdown(width=200,
                                    hint_text="Filtro per anno",
-                                   label= "Anno",
+                                   label="anno",
                                    options=[ft.dropdown.Option(key="None",
                                                                text="Nessun filtro")],
                                    on_change=self._controller.read_anno)
@@ -39,10 +39,11 @@ class View(ft.UserControl):
         self._controller.populate_dd_anno()
 
         self.dd_brand = ft.Dropdown(width=200,
-                                    hint_text="Filtro per brand",
-                                    label="Brand",
-                                    options=[ft.dropdown.Option(key="None", text="Nessun filtro")],
-                                    on_change=self._controller.read_brand)
+                                   hint_text="Filtro per brand",
+                                   label="brand",
+                                   options=[ft.dropdown.Option(key="None",
+                                                            text="Nessun filtro")],
+                                                            on_change=self._controller.read_brand)
 
         self._controller.populate_dd_brand()
 
@@ -50,7 +51,7 @@ class View(ft.UserControl):
                                        hint_text="Filtro per Retailer",
                                        label="Retailer",
                                        options = [ft.dropdown.Option(key="None",
-                                                                     text="Nessune filtro",
+                                                                     text="Nessun filtro",
                                                                      data=None,
                                                                      on_click=self._controller.read_retailer)])
         self._controller.populate_dd_retailer()

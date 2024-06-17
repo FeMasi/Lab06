@@ -8,7 +8,8 @@ class ProductDao:
         cnx = DBConnect.get_connection()
         if cnx is not None:
             cursor = cnx.cursor()
-            query = "SELECT DISTINCT gp.Product_brand FROM go_products gp"
+            query = ("""SELECT DISTINCT gp.Product_brand
+                        FROM go_products gp""")
             cursor.execute(query)
             rows = cursor.fetchall()
             cursor.close()

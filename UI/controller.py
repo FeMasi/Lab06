@@ -18,12 +18,20 @@ class Controller:
         self._view.update_page()
 
     def read_anno(self, e):
-        self._anno = e.control.data
+
+        print(e.control.value)
+        self._anno = e.control.value
 
     def read_brand(self, e):
-        self._brand = e.control.data
+
+        print(e.control.value)
+        if e.control.value == "None":
+            self._brand = None
+        else:
+            self._brand = e.control.value
 
     def read_retailer(self, e):
+        print(e.control.data)
         self._retailer = e.control.data
 
     def populate_dd_brand(self):
@@ -42,6 +50,7 @@ class Controller:
         self._view.update_page()
 
     def handle_top_vendite(self, e):
+        self._view.lst_result.controls.clear()
         self._view.pr_ring.visible = True
         self._view.btn_top_vendite.disabled = True
         self._view.btn_analizza_vendite.disabled = True
@@ -59,4 +68,18 @@ class Controller:
         self._view.update_page()
 
     def handle_analizza_vendite(self, e):
-        pass
+        self._view.lst_result.controls.clear()
+        self._view.pr_ring.visible = True
+        self._view.btn_top_vendite.disabled = True
+        self._view.btn_analizza_vendite.disabled = True
+        self._view.update_page()
+        statistiche_vendite = self._model.get_statistiche_vendite(self._anno, self._brand, self._retailer)
+        self._view.pr_ring.visible = False
+        self._view.btn_top_vendite.disabled = False
+        self._view.btn_analizza_vendite.disabled = False
+        self._view.lst_result.controls.append(ft.Text(f"statistiche vendite:"))
+        self._view.lst_result.controls.append(ft.Text(f"giro d'affari: {statistiche_vendite[0]}"))
+        self._view.lst_result.controls.append(ft.Text(f"numero vendite: {statistiche_vendite[3]}"))
+        self._view.lst_result.controls.append(ft.Text(f"numero retailers: {statistiche_vendite[1]}"))
+        self._view.lst_result.controls.append(ft.Text(f"numero prodotti: {statistiche_vendite[2]}"))
+        self._view.update_page()
