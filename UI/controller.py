@@ -77,6 +77,7 @@ class Controller:
         self._view.pr_ring.visible = False
         self._view.btn_top_vendite.disabled = False
         self._view.btn_analizza_vendite.disabled = False
+        #meglio fare uno a uno per non fare casini
         self._view.lst_result.controls.append(ft.Text(f"statistiche vendite:"))
         self._view.lst_result.controls.append(ft.Text(f"giro d'affari: {statistiche_vendite[0]}"))
         self._view.lst_result.controls.append(ft.Text(f"numero vendite: {statistiche_vendite[3]}"))
